@@ -10,7 +10,6 @@ import Hall from './Hall'
 import HallReal from './HallReal'
 import HallBanquet from './HallBanquet'
 import Stage from './Stage'
-import CoupleSlot from './CoupleSlot'
 import { FogController, GoldenFountains, Petals, Dust } from './Atmosphere'
 import { progress, sseg } from '../scroll/timeline'
 import { MANDAP_Z, BANQUET } from './world'
@@ -72,7 +71,6 @@ export default function CinematicCanvas({ wedding, quality, mobile, onReady }) {
           <Hall quality={quality} />
         )}
         {!BANQUET && <Stage quality={quality} />}
-        <CoupleSlot quality={quality} modelUrl={wedding.models?.couple} modelScale={wedding.models?.coupleScale} />
 
         <Dust quality={quality} />
         <GoldenFountains quality={quality} />

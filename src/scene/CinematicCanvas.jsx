@@ -14,6 +14,7 @@ import CoupleSlot from './CoupleSlot'
 import { FogController, GoldenFountains, Petals, Dust } from './Atmosphere'
 import { progress, sseg } from '../scroll/timeline'
 import { MANDAP_Z, BANQUET } from './world'
+import { publicAsset } from '../lib/publicAsset'
 
 /** Calls onReady after the first few frames so the loader knows shaders are warm. */
 function ReadySignal({ onReady }) {
@@ -76,7 +77,7 @@ export default function CinematicCanvas({ wedding, quality, mobile, onReady }) {
         <Dust quality={quality} />
         <GoldenFountains quality={quality} />
         <Stars radius={140} depth={30} count={quality.tier === 'high' ? 1800 : 700} factor={4} fade speed={0.4} />
-        <Environment files="/hdri/lobby.exr" environmentIntensity={0.55} environmentRotation={[0, Math.PI, 0]} />
+        <Environment files={publicAsset('/hdri/lobby.exr')} environmentIntensity={0.55} environmentRotation={[0, Math.PI, 0]} />
         <ExposeScene />
         {/* petals that travel with the camera through the hall */}
         <Petals

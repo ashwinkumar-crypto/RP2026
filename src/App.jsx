@@ -86,14 +86,14 @@ function Cinematic({ caps }) {
   const [imgsLoaded, setImgsLoaded] = useState(0)
   const [fontsReady, setFontsReady] = useState(false)
   const [pct, setPct] = useState(4)
+  const [entered, setEntered] = useState(false)
   const [muted, setMuted] = useState(false)
   const [crashed, setCrashed] = useState(null)
 
-  // Start playback with the existing autoplay fallback and restore mute state.
+  // Initialize the music controller and restore session mute state.
   useEffect(() => {
     music.current = createMusic(wedding.music)
     setMuted(music.current.muted)
-    music.current.start()
     return () => {
       music.current?.dispose()
     }
@@ -140,15 +140,12 @@ function Cinematic({ caps }) {
     return () => clearInterval(id)
   }, [ready, photo, imgsLoaded])
 
-  // Keep the page in place until the scene is ready, then refresh its pin.
+  // Keep the page in place until the guest enters, then refresh its pin.
   useEffect(() => {
-    document.documentElement.style.overflow = ready ? '' : 'hidden'
-    document.body.style.overflow = ready ? '' : 'hidden'
-    if (ready) {
-      appState.enteredAt = performance.now()
-      requestAnimationFrame(() => timeline.current?.st.refresh())
-    }
-  }, [ready])
+    document.documentElement.style.overflow = entered ? '' : 'hidden'
+    document.body.style.overflow = entered ? '' : 'hidden'
+    if (entered && ready) requestAnimationFrame(() => timeline.current?.st.refresh())
+  }, [entered, ready])
 
   useEffect(() => {
     timeline.current = initScrollTimeline(stageRef.current, {
@@ -167,6 +164,12 @@ function Cinematic({ caps }) {
     setMuted(next)
   }, [])
 
+  const onEnter = useCallback(() => {
+    appState.enteredAt = performance.now()
+    music.current?.start()
+    setEntered(true)
+  }, [])
+
   const skip = useCallback(() => timeline.current?.scrollToProgress(photo ? FINALE_AT - 0.1 : FINALE_AT), [photo])
 
   return (
@@ -176,8 +179,8 @@ function Cinematic({ caps }) {
           3D scene failed: {crashed}
         </div>
       )}
-      <Loader progress={pct} ready={ready} />
-      {ready && <MusicToggle muted={muted} onToggle={toggleMute} />}
+      <Loader wedding={wedding} progress={pct} ready={ready} entered={entered} onEnter={onEnter} />
+      {entered && <MusicToggle muted={muted} onToggle={toggleMute} />}
       {!photo && typeof location !== 'undefined' && location.search.includes('export') && <ExportGLB />}
 
       <main>
@@ -186,7 +189,7 @@ function Cinematic({ caps }) {
             <>
               <PlateStage images={wedding.scenes} />
               <Particles low={caps.quality.tier === 'low'} />
-              <OverlayPlates wedding={wedding} onSkip={skip} hintVisible={ready} />
+              <OverlayPlates wedding={wedding} onSkip={skip} hintVisible={entered} />
             </>
           ) : (
             <>
@@ -195,7 +198,7 @@ function Cinematic({ caps }) {
                   <CinematicCanvas wedding={wedding} quality={caps.quality} mobile={caps.mobile} onReady={() => setCanvasReady(true)} />
                 </Suspense>
               </Boundary>
-              <Overlay wedding={wedding} onSkip={skip} hintVisible={ready} />
+              <Overlay wedding={wedding} onSkip={skip} hintVisible={entered} />
             </>
           )}
         </div>

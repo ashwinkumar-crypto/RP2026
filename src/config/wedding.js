@@ -1,3 +1,5 @@
+import { publicAsset } from '../lib/publicAsset'
+
 /**
  * ─────────────────────────────────────────────────────────────────────────────
  *  THE WEDDING JOURNEY — central configuration
@@ -89,17 +91,17 @@ export const wedding = {
   // ── Experience ────────────────────────────────────────────────────────────
   experience: '3d',
   scenes: [
-    '/scenes/02-palace.jpg',
-    '/scenes/03-pathway.jpg',
-    '/scenes/04-stage.jpg',
-    '/scenes/05-couple.jpg',
-    '/scenes/06-details.jpg',
+    publicAsset('/scenes/02-palace.jpg'),
+    publicAsset('/scenes/03-pathway.jpg'),
+    publicAsset('/scenes/04-stage.jpg'),
+    publicAsset('/scenes/05-couple.jpg'),
+    publicAsset('/scenes/06-details.jpg'),
   ],
 
   // 3D models (BANQUET-HALL-V3)
   models: {
-    venue: '/models/banquet_hall_v3.glb',
-    chair: '/models/chair.glb',
+    venue: publicAsset('/models/banquet_hall_v3_high.glb'),
+    chair: publicAsset('/models/chair.glb'),
     couple: '',
     coupleScale: 1,
   },
@@ -109,8 +111,8 @@ export const wedding = {
   },
 
   music: {
-    src: '/audio/background-music.mp3',
-    fallbackSrc: '/audio/background-music.mp4',
+    src: publicAsset('/audio/background-music.mp3'),
+    fallbackSrc: publicAsset('/audio/background-music.mp4'),
     volume: 0.65,
   },
 }

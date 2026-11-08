@@ -53,7 +53,7 @@ Scenes: grand entrance (starts immediately) → decorated pathway (25–45%) →
 ## Performance and accessibility
 
 - Quality tiers (`src/lib/device.js`): fewer lights, particles and no shadows on mobile; adaptive pixel ratio.
-- 3D code is lazy-loaded; a brief progress indicator is shown while the scene loads.
+- 3D code is lazy-loaded; the welcome screen shows loading progress and remains until the guest selects **Enter Celebration** (which also unlocks audio).
 - Devices without WebGL, or with `prefers-reduced-motion`, get a lightweight, normally scrolling version of the same content.
 - Scenes are procedural (Three.js primitives). To use real models, replace a scene component with a `useGLTF` model.
 
@@ -85,9 +85,9 @@ Occasion text lives in `src/config/wedding.js` (`occasion`, `captions`, `invitat
 
 ## Banquet hall model v3 (current default)
 
-`models.venue: '/models/banquet_hall_v3.glb'` is your supplied banquet-hall package (the 6.5 MB meshopt build): forecourt with
+`models.venue` points to the supplied high-detail banquet-hall package (25.2 MB): forecourt with
 lamp posts, portico, reception foyer, main hall with chandeliers, pillars, staircases and the engagement stage, all with real
 doorways. The scroll journey follows the package's own walkthrough route (`camera/camera_path.json`), re-timed to the scroll
-and extended with the couple reveal on the stage. The model's 26 built-in lights are dropped (too many for real-time) and
+and extended with the couple reveal on the stage. The model's built-in lights are dropped (too many for real-time) and
 replaced by a few scroll-driven lights. The model is shifted by `BANQUET_DZ` (src/scene/world.js) so its forecourt sits
 in front of the camera's starting view. A file name containing `banquet` selects this layout.

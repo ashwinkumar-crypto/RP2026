@@ -1,6 +1,5 @@
 import * as THREE from 'three'
-import { longDate, mapsUrl } from '../lib/format'
-import { drawQRCode } from '../lib/qrcode'
+import { longDate } from '../lib/format'
 
 const canvasTex = (canvas, { repeat, srgb = true, aniso = 4 } = {}) => {
   const t = new THREE.CanvasTexture(canvas)
@@ -533,24 +532,11 @@ export function drawInvitation(canvas, w) {
   g.font = 'italic 18px "Cormorant Garamond", serif'
   g.fillText(`"${w.closingMessage || 'Your presence will make our joy complete.'}"`, W / 2, 498)
 
-  // 14. Location QR Code with caption
-  const qrUrl = mapsUrl(w.venue)
-  const qrSize = 88
-  const qrX = W / 2 - qrSize / 2
-  const qrY = 514
-
-  // Draw crisp QR code onto canvas
-  drawQRCode(g, qrUrl, qrX, qrY, qrSize, { fg: '#4a081a', bg: '#ffffff', margin: 2 })
-
-  // QR Border
-  g.strokeStyle = '#b8892f'
-  g.lineWidth = 1
-  g.strokeRect(qrX - 1, qrY - 1, qrSize + 2, qrSize + 2)
-
+  // 14. Venue callout
   g.fillStyle = '#8a631c'
   g.font = '600 11px Cinzel, serif'
   g.letterSpacing = '1.5px'
-  g.fillText('SCAN FOR LOCATION', W / 2, 620)
+  g.fillText('OPEN IN GOOGLE MAPS', W / 2, 620)
   g.letterSpacing = '0px'
 
   g.fillStyle = '#5c1024'

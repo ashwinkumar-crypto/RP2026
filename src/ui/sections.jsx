@@ -1,7 +1,6 @@
 import { dateParts, formatTime, longDate, mapsUrl, venueLine, daysUntil, coupleFullNames } from '../lib/format'
 import { downloadICS } from '../lib/ics'
 import { GaneshaEmblem, HangingLamp, FestiveThoranam, TraditionalSeparator, BananaLeaf } from './TraditionalMotifs'
-import QRCodeView from './QRCodeView'
 
 export function Ornament({ className = '' }) {
   return <TraditionalSeparator className={className} />
@@ -75,12 +74,12 @@ export function InvitationPanel({ wedding }) {
   )
 }
 
-/** Date, time, venue and QR code (Scene 6, part 2). */
+/** Date, time, and venue details (Scene 6, part 2). */
 export function WhenWhere({ wedding, link = true }) {
   const d = dateParts(wedding.date)
 
   return (
-    <div className="grid items-center gap-8 text-center sm:grid-cols-3 sm:gap-6 sm:text-left">
+    <div className="grid items-center gap-8 text-center sm:grid-cols-2 sm:gap-6 sm:text-left">
       {/* Date & Time Column */}
       <div className="rounded-2xl border border-gold/30 bg-black/30 p-5 backdrop-blur-sm sm:col-span-1">
         <p className="label mb-2 text-gold-light">Date &amp; Day</p>
@@ -116,14 +115,9 @@ export function WhenWhere({ wedding, link = true }) {
             rel="noopener noreferrer"
             className="mt-3 inline-block font-cinzel text-[0.72rem] uppercase tracking-[0.2em] text-gold-light underline decoration-gold/50 underline-offset-4 transition hover:text-gold"
           >
-            Open in Google Maps ↗
+            Open in Google Maps ?
           </a>
         )}
-      </div>
-
-      {/* QR Code Column */}
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-gold/30 bg-black/30 p-5 backdrop-blur-sm sm:col-span-1">
-        <QRCodeView venue={wedding.venue} size={110} />
       </div>
     </div>
   )
@@ -152,7 +146,7 @@ export function ActionButtons({ wedding, className = '' }) {
   return (
     <div className={`flex flex-wrap items-center justify-center gap-3 ${className}`}>
       <a className="btn-gold" href={mapsUrl(wedding.venue)} target="_blank" rel="noopener noreferrer">
-        View Location
+        Open in Google Maps
       </a>
       <button type="button" className="btn-ghost" onClick={() => downloadICS(wedding)}>
         Add to Calendar

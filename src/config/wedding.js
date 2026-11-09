@@ -100,7 +100,7 @@ export const wedding = {
 
   // 3D models (BANQUET-HALL-V3)
   models: {
-    venue: publicAsset('/models/banquet_hall_v3_high.glb'),
+    venue: publicAsset('/models/banquet_hall_v3_daytime.glb'),
     chair: publicAsset('/models/chair.glb'),
     couple: '',
     coupleScale: 1,

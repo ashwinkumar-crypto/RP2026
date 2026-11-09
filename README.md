@@ -61,16 +61,12 @@ Scenes: grand entrance (starts immediately) → decorated pathway (25–45%) →
 
 `npm run build`, then upload `dist/` to any static host (Netlify, Vercel, Cloudflare Pages, GitHub Pages). No server required.
 
-## Real venue models & licences
+## Venue model
 
-The default hall is a real stone atrium (`public/models/sponza.glb`) with a real velvet chair
-(`public/models/chair.glb`), placed and dressed with curtains, carpet, lanterns, roses and a stage by the code in
-`src/scene/HallReal.jsx` / `RealModels.jsx`. Set `models.venue: ''` in `src/config/wedding.js` to use the
-built-in procedural hall instead.
+The default venue is `public/models/banquet_hall_v3_daytime.glb`. The velvet chair model
+(`public/models/chair.glb`) is used by the alternate real-atrium scene. Set `models.venue: ''` in
+`src/config/wedding.js` to use the built-in procedural hall instead.
 
-- **Sponza atrium** – © Crytek / Cryengine Limited License (see `public/models/licenses/`). It restricts
-  redistribution: fine for a private invitation, but check the licence before publishing the model commercially.
-  Swap in your own venue `.glb` (long axis along X) via `models.venue`.
 - **SheenChair** – CC0 (Wayfair / Eric Chadwick, Khronos glTF samples).
 - **People** – the bride & groom are stylised stand-ins. For realistic people, drop a `.glb` of the couple
   (standing side by side, facing +Z) into `public/models/` and set `models.couple`.
@@ -85,7 +81,7 @@ Occasion text lives in `src/config/wedding.js` (`occasion`, `captions`, `invitat
 
 ## Banquet hall model v3 (current default)
 
-`models.venue` points to the supplied high-detail banquet-hall package (25.2 MB): forecourt with
+`models.venue` points to the supplied daytime banquet-hall package (27.4 MB): forecourt with
 lamp posts, portico, reception foyer, main hall with chandeliers, pillars, staircases and the engagement stage, all with real
 doorways. The scroll journey follows the package's own walkthrough route (`camera/camera_path.json`), re-timed to the scroll
 and extended with the couple reveal on the stage. The model's built-in lights are dropped (too many for real-time) and

@@ -7,7 +7,7 @@ import wedding from '../config/wedding'
 const venueUrl = wedding.models?.venue || ''
 /** The supplied banquet hall (entrance wall at the palace gate, stage at the far end, its own sofa/stage/chairs). */
 export const BANQUET = /banquet/i.test(venueUrl)
-/** A real stone atrium (Sponza): the stage is then built inside it. */
+/** A real venue model: the stage is then built inside it. */
 export const REAL_VENUE = !!venueUrl && !BANQUET
 /** The banquet model's own z axis is shifted so its forecourt sits in front of the entrance camera view. */
 export const BANQUET_DZ = -74

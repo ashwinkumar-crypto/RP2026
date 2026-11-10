@@ -75,7 +75,7 @@ export function InvitationPanel({ wedding }) {
 }
 
 /** Date, time, and venue details (Scene 6, part 2). */
-export function WhenWhere({ wedding, link = true }) {
+export function WhenWhere({ wedding }) {
   const d = dateParts(wedding.date)
 
   return (
@@ -108,16 +108,6 @@ export function WhenWhere({ wedding, link = true }) {
         <p className="mt-1 font-display text-sm text-ivory-dim sm:text-base">
           {venueLine(wedding.venue)}
         </p>
-        {link && (
-          <a
-            href={mapsUrl(wedding.venue)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-block font-cinzel text-[0.72rem] uppercase tracking-[0.2em] text-gold-light underline decoration-gold/50 underline-offset-4 transition hover:text-gold"
-          >
-            Open in Google Maps ?
-          </a>
-        )}
       </div>
     </div>
   )
@@ -146,7 +136,7 @@ export function ActionButtons({ wedding, className = '' }) {
   return (
     <div className={`flex flex-wrap items-center justify-center gap-3 ${className}`}>
       <a className="btn-gold" href={mapsUrl(wedding.venue)} target="_blank" rel="noopener noreferrer">
-        Open in Google Maps
+        View Location
       </a>
       <button type="button" className="btn-ghost" onClick={() => downloadICS(wedding)}>
         Add to Calendar
